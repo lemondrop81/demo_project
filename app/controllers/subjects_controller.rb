@@ -13,12 +13,20 @@ class SubjectsController < ApplicationController
   end
 
   def create
+    @subject = Subject.new(subject_params)
+
+    if @subject.save
+      redirect_to(subjects_path)
+    else
+      render('new')
+    end
+
   end
 
   def edit
   end
 
-  def upload
+  def update
   end
 
   def delete
@@ -27,4 +35,8 @@ class SubjectsController < ApplicationController
   def destory
   end
   
+  private
+    def subject_params
+      params.require(:subject).permit(:name, :visible, :position)
+    end
 end
